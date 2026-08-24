@@ -1,0 +1,9 @@
+<div class="w-full h-full flex">
+    <app-sidebar></app-sidebar>
+    <div class="flex-1 h-full flex flex-col">
+        <app-header [pageTitle]="pageTitle()"></app-header>
+        <main class="flex-1 p-8 bg-app-navy-50">
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>

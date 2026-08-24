@@ -1,0 +1,51 @@
+<div class="bg-white border border-app-border rounded-lg p-4 space-y-4">
+    <div class="flex gap-4">
+        <div class="flex-1 space-y-1">
+            <a href="/transfers/id" class="text-lg font-semibold hover:underline">
+                22 de agosto de 2026 · 5:14 p.m.
+            </a>
+            <p class="text-app-text-muted">
+                <span>job-003</span>
+                &middot;
+                <span>Villa Lucre</span>
+            </p>
+        </div>
+        <!-- <span class="px-2 py-1 uppercase rounded-full">
+
+        </span> -->
+    </div>
+    <div class="space-y-2">
+        <div class="w-full h-2 rounded-full overflow-hidden flex items-stretch bg-app-neutral-200">
+            <div class="h-full w-2/5 bg-app-success"></div>
+            <div class="h-full w-1/5 bg-app-error"></div>
+            <div class="h-full w-2/5 bg-app-pending"></div>
+        </div>
+        <div class="flex gap-4 items-center">
+            <div class="flex gap-1 items-center text-app-text-secodnary">
+                <i class="size-2 rounded-full bg-app-success"></i>
+                Éxito (2)
+            </div>
+            <div class="flex gap-1 items-center text-app-text-secodnary">
+                <i class="size-2 rounded-full bg-app-error"></i>
+                Fracaso (1)
+            </div>
+            <div class="flex gap-1 items-center text-app-text-secodnary">
+                <i class="size-2 rounded-full bg-app-pending"></i>
+                Pendiente (2)
+            </div>
+        </div>
+    </div>
+    <hr class="border-t border-app-field-border">
+    <!-- <p class="text-app-text-secondary">Sin errores registrados.</p> -->
+    <div class="w-full flex gap-3 p-2 border border-app-red-200 bg-app-red-50 rounded-lg">
+        <div>
+            <svg lucideCircleAlert [size]="18" class="mt-1 text-app-red-600"></svg>
+        </div>
+        <div class="flex-1">
+            <p class="text-app-red-800">
+                <b class="font-semibold">2 artículos sin transferir.</b>
+                Código de barra duplicado en la sucursal destino.
+            </p>
+        </div>
+    </div>
+</div>

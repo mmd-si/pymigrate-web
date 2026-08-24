@@ -1,0 +1,75 @@
+<main class="w-full h-full flex">
+    <div class="flex-1 bg-app-navy-900 flex flex-col gap-4 p-4 lg:p-12 text-white">
+        <app-logo></app-logo>
+        <div class="flex-1 flex flex-col justify-center items-start max-w-sm space-y-4">
+            <div class="p-1 rounded-full w-32 bg-app-yellow-400"></div>
+            <h2 class="text-4xl font-semibold">Inventario y transferencias entre sistemas</h2>
+            <p class="text-xl text-app-indigo-200">Consulte existencias por código de barra y mueva artículos a Odoo.</p>
+        </div>
+        <div class="text-app-navy-400">
+            <span>v0.0.1</span>
+            &middot;
+            <span>Panamá</span>
+        </div>
+    </div>
+    <div class="flex-1 bg-app-background p-4">
+        <div class="w-full max-w-sm mx-auto h-full flex flex-col justify-center items-center space-y-6">
+            <div class="w-full space-y-1">
+                <h2 class="text-3xl font-semibold">Iniciar Sesión</h2>
+                <p class="text-app-text-secondary">Utiliza tus credenciales de MMD Pawn para acceder al inventario.</p>
+            </div>
+            <form class="w-full space-y-4">
+                <div class="w-full space-y-1">
+                    <label 
+                        for="username" 
+                        class="block uppercase font-medium text-app-text-secondary"
+                    >Usuario</label>
+                    <div class="flex items-center gap-2 px-2 py-1 border border-app-field-border rounded-lg w-full bg-white outline-2 outline-transparent has-focus:outline-app-indigo-600 duration-150">
+                        <input 
+                            type="text" 
+                            name="username" 
+                            id="username" 
+                            class="text-lg bg-transparent flex-1 focus:outline-0"
+                        >
+                    </div>
+                </div>
+                <div class="w-full space-y-1">
+                    <label 
+                        for="password" 
+                        class="block uppercase font-medium text-app-text-secondary"
+                    >Clave</label>
+                    <div class="flex items-center gap-2 px-2 py-1 border border-app-field-border rounded-lg w-full bg-white outline-2 outline-transparent has-focus:outline-app-indigo-600 duration-150">
+                        <input 
+                            [type]="showPassword() ? 'text' : 'password'"
+                            name="password" 
+                            id="password" 
+                            class="text-lg bg-transparent flex-1 focus:outline-0"
+                        >
+                        <button 
+                            type="button"
+                            class="text-app-indigo-600 hover:underline font-medium" 
+                            (click)="toggleShowPassword()"
+                        >Mostrar</button>
+                    </div>
+                </div>
+                <div>
+                    <label for="rememberMe" class="group flex gap-2 items-center cursor-pointer">
+                        <div class="size-5 flex justify-center items-center border border-app-field-border group-has-checked:border-app-indigo-600 group-has-checked:bg-app-indigo-600 duration-150 rounded bg-white">
+                            <svg [size]="16" color="white" lucideCheck class="scale-0 group-has-checked:scale-100 duration-150"></svg>
+                        </div>
+                        <input type="checkbox" name="rememberMe" id="rememberMe" class="hidden">
+                        <span>Recordarme por 30 días</span>
+                    </label>
+                </div>
+                <div>
+                    <input 
+                        type="submit" 
+                        value="Iniciar sesión" 
+                        class="w-full flex py-1 px-2 rounded-lg text-white bg-app-indigo-600 hover:bg-app-indigo-700 active:translate-y-0.5 duration-150"
+                    >
+                </div>          
+            </form>
+            <p class="text-center text-app-text-muted">¿Problemas para entrar? Contacte a soporte interno.</p>
+        </div>
+    </div>
+</main>

@@ -1,3 +1,108 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+@theme {
+    --font-sans: 'Barlow', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+    --color-app-navy-50: #F2F1F8;
+    --color-app-navy-100: #E3E1F1;
+    --color-app-navy-200: #C6C2E2;
+    --color-app-navy-300: #9E98CB;
+    --color-app-navy-400: #746CAE;
+    --color-app-navy-500: #524A8E;
+    --color-app-navy-600: #3D3573;
+    --color-app-navy-700: #2E265E;
+    --color-app-navy-800: #241C57;
+    --color-app-navy-900: #1B1552;
+
+    --color-app-indigo-50: #EEECFB;
+    --color-app-indigo-100: #DEDAF7;
+    --color-app-indigo-200: #BFB7EF;
+    --color-app-indigo-300: #9A8DE4;
+    --color-app-indigo-400: #7364D4;
+    --color-app-indigo-500: #5342C0;
+    --color-app-indigo-600: #3A2BAD;
+    --color-app-indigo-700: #2A1E9E;
+    --color-app-indigo-800: #221880;
+    --color-app-indigo-900: #191259;
+
+    --color-app-yellow-50: #FFFCE0;
+    --color-app-yellow-100: #FFF6B8;
+    --color-app-yellow-200: #FFEF80;
+    --color-app-yellow-300: #FFE94D;
+    --color-app-yellow-400: #FFE500;
+    --color-app-yellow-500: #E6CE00;
+    --color-app-yellow-600: #C4B000;
+    --color-app-yellow-700: #9C8C00;
+    --color-app-yellow-800: #6E6300;
+    --color-app-yellow-900: #423B00;
+
+    --color-app-neutral-25: #FBFBFD;
+    --color-app-neutral-50: #F6F6FA;
+    --color-app-neutral-100: #F1F1F6;
+    --color-app-neutral-200: #E7E7EF;
+    --color-app-neutral-300: #DDDDE6;
+    --color-app-neutral-400: #C6C6D2;
+    --color-app-neutral-500: #A2A2B4;
+    --color-app-neutral-600: #8A8A9C;
+    --color-app-neutral-700: #6B6B80;
+    --color-app-neutral-800: #3B3B50;
+    --color-app-neutral-900: #16162A;
+
+    --color-app-green-50: #E8F7EE;
+    --color-app-green-100: #C8ECD6;
+    --color-app-green-200: #8FD9AE;
+    --color-app-green-300: #4FC482;
+    --color-app-green-400: #22B15E;
+    --color-app-green-500: #17A34A;
+    --color-app-green-600: #12833B;
+    --color-app-green-700: #0E652E;
+    --color-app-green-800: #0A4720;
+    --color-app-green-900: #062B13;
+
+    --color-app-red-50: #FDECEC;
+    --color-app-red-100: #F9D2D2;
+    --color-app-red-200: #F2A5A5;
+    --color-app-red-300: #EB7373;
+    --color-app-red-400: #E64B4B;
+    --color-app-red-500: #E03131;
+    --color-app-red-600: #BC2222;
+    --color-app-red-700: #941B1B;
+    --color-app-red-800: #6B1313;
+    --color-app-red-900: #430C0C;
+
+    --color-app-canvas: #E9E9EF;
+    --color-app-background: #F6F6FA;
+    --color-app-surface: #FFFFFF;
+    --color-app-table-header: #FAFAFC;
+    --color-app-border: #E7E7EF;
+    --color-app-field-border: #DDDDE6;
+    --color-app-text-primary: #16162A;
+    --color-app-text-secondary: #6B6B80;
+    --color-app-text-muted: #8A8A9C;
+    --color-app-row-selected: #FAFAFF;
+    --color-app-chip-info: #EEECFB;
+    --color-app-chip-neutral: #F0F0F5;
+    --color-app-branch-avatar: #FFF6B8;
+    --color-app-success: #17A34A;
+    --color-app-error: #E03131;
+    --color-app-pending: #C6C6D2;
+}
+
+html,
+body {
+    color-scheme: light;
+    background-color: var(--color-app-canvas);
+    color: var(--color-app-text-primary);
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Barlow', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+button, 
+a, 
+input[type="submit"], 
+input[type="reset"] {
+    cursor: pointer;
+}
