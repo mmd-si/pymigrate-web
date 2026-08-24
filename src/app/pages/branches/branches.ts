@@ -1,6 +1,6 @@
 import { Component, signal } from "@angular/core";
 import { BranchCard } from "@components/branch-card/branch-card";
-import { Branch } from "@core/interface/branch";
+import { Branch } from "@core/models/branch";
 
 @Component({
     imports: [BranchCard],

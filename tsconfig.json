@@ -10,7 +10,9 @@
         "experimentalDecorators": true,
         "paths": {
             "@components/*": ["./src/app/components/*"],
-            "@core/*": ["./src/app/core/*"]
+            "@core/*": ["./src/app/core/*"],
+            "@layouts/*": ["./src/app/layouts/*"],
+            "@pages/*": ["./src/app/pages/*"]
         },
         "importHelpers": true,
         "target": "esnext",
