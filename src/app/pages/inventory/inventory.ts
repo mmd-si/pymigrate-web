@@ -1,6 +1,7 @@
-import { Component, model, signal } from "@angular/core";
+import { Component, input, model, signal } from "@angular/core";
 import { ItemDetails } from "@components/item-details/item-details";
-import { formatDate, toDateObject, toMoney } from "@core/utils";
+import { InventoryItem } from "@core/models/inventory-item";
+import { formatDateShort, toDateObject, commaSeparated } from "@core/utils";
 import { LucideCheck, LucideSearch, LucideX } from "@lucide/angular";
 
 @Component({
@@ -9,26 +10,21 @@ import { LucideCheck, LucideSearch, LucideX } from "@lucide/angular";
     templateUrl: "./inventory.html",
 })
 export class Inventory {
+    public id = input.required<string>();
     public search = model("");
-    public inventory = signal([{ 
-        barcode: "1234567", 
-        entryDate: new Date(), 
-        description: "Lorem ipsum dolor sit amet", 
-        carats: "18K", 
-        cost: 12.32, 
-        price: 20.99, 
-        weight: 10 
-    }]);
+
+    public inventory = signal<InventoryItem[]>([]);
+
 
     public toDateObject(date: string | number | Date): Date {
         return toDateObject(date);
     }
 
     public formatDate(date: Date): string {
-        return formatDate(date);
+        return formatDateShort(date);
     }
 
     public toMoney(money: number): string {
-        return toMoney(money);
+        return commaSeparated(money);
     }
 }

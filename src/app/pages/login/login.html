@@ -18,7 +18,7 @@
                 <h2 class="text-3xl font-semibold">Iniciar Sesión</h2>
                 <p class="text-app-text-secondary">Utiliza tus credenciales de MMD Pawn para acceder al inventario.</p>
             </div>
-            <form class="w-full space-y-4">
+            <form class="w-full space-y-4" (ngSubmit)="login()">
                 <div class="w-full space-y-1">
                     <label 
                         for="username" 
@@ -30,6 +30,8 @@
                             name="username" 
                             id="username" 
                             class="text-lg bg-transparent flex-1 focus:outline-0"
+                            [value]="username()"
+                            (input)="username.set($event.target.value)"
                         >
                     </div>
                 </div>
@@ -44,6 +46,8 @@
                             name="password" 
                             id="password" 
                             class="text-lg bg-transparent flex-1 focus:outline-0"
+                            [value]="password()"
+                            (input)="password.set($event.target.value)"
                         >
                         <button 
                             type="button"
@@ -57,7 +61,14 @@
                         <div class="size-5 flex justify-center items-center border border-app-field-border group-has-checked:border-app-indigo-600 group-has-checked:bg-app-indigo-600 duration-150 rounded bg-white">
                             <svg [size]="16" color="white" lucideCheck class="scale-0 group-has-checked:scale-100 duration-150"></svg>
                         </div>
-                        <input type="checkbox" name="rememberMe" id="rememberMe" class="hidden">
+                        <input 
+                            type="checkbox" 
+                            name="rememberMe" 
+                            id="rememberMe" 
+                            class="hidden"
+                            [checked]="rememberMe()"
+                            (change)="rememberMe.set($event.target.checked)"
+                        >
                         <span>Recordarme por 30 días</span>
                     </label>
                 </div>

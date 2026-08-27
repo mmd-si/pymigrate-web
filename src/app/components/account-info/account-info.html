@@ -1,1 +1,10 @@
-<p>account-info works!</p>
+<div class="w-full p-4 rounded-lg">
+    <h4 class="text-lg font-medium">{{ session().fullName() }}</h4>
+    <button 
+        class="text-app-text-muted hover:underline hover:text-white flex items-center gap-2 duration-150"
+        (click)="logout()"
+    >
+        Cerrar sesión
+        <svg lucideLogOut [size]="14"></svg>
+    </button>
+</div>

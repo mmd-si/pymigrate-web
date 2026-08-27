@@ -31,11 +31,7 @@ export class DetailedJobItem extends JSONModel {
         this.result = result;
     }
 
-    public static fromJSON(json: string): DetailedJobItem {
-        return this.fromRecord(JSON.parse(json) as IDetailedJobItem);
-    }
-
-    public static fromRecord(record: IDetailedJobItem): DetailedJobItem {
+    public static fromJSON(record: IDetailedJobItem): DetailedJobItem {
         if (
             !("item_id" in record) ||
             !("barcode" in record) ||

@@ -106,3 +106,22 @@ input[type="submit"],
 input[type="reset"] {
     cursor: pointer;
 }
+
+.alert-appear {
+    animation: alertAppear 0.3s ease-in-out forwards;
+}
+
+.alert-disappear {
+    animation: alertAppear 0.3s ease-in-out reverse forwards;
+}
+
+@keyframes alertAppear {
+    0% {
+        opacity: 0;
+        transform: translateX(1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

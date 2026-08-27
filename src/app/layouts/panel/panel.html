@@ -1,4 +1,6 @@
+
 <div class="w-full h-full flex">
+    <app-alert [alert]="alertService.current()" [(visible)]="alertService.visible"></app-alert>
     <app-sidebar></app-sidebar>
     <div class="flex-1 h-full flex flex-col">
         <app-header [pageTitle]="pageTitle()"></app-header>

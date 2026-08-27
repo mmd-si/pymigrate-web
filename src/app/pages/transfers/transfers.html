@@ -1,3 +1,16 @@
 <section class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
-    <app-transfer-card></app-transfer-card>
+    @if (transfers.hasValue()) {
+        @let list = transfers.value();
+        @if (list.length) {
+            @for (ts of list; track ts.id) {
+                <app-transfer-card [summary]="ts"></app-transfer-card>
+            }
+        } @else {
+
+        }
+    } @else if (transfers.isLoading()) {
+
+    } @else if (transfers.error()) {
+
+    }
 </section>

@@ -1,3 +1,8 @@
+export interface JSONModelConstructor<T extends JSONModel> {
+    fromJSON(record: Record<string, any>): T;
+}
+
+
 export abstract class JSONModel {
     protected static missingRequiredFields(): TypeError {
         return new TypeError(`${this.name}: JSON object missing required fields.`);

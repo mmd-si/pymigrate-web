@@ -34,11 +34,7 @@ export class DetailedError extends JSONModel {
         this.occurredAt = occurredAt;
     }
 
-    public static fromJSON(json: string): DetailedError {
-        return this.fromRecord(JSON.parse(json) as IDetailedError);
-    }
-
-    public static fromRecord(record: IDetailedError): DetailedError {
+    public static fromJSON(record: IDetailedError): DetailedError {
         if (!("error_id" in record) || !("job_id" in record) || !("message" in record) || !("occurred_at" in record)) {
             throw this.missingRequiredFields();
         }

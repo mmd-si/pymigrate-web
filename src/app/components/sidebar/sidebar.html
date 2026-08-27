@@ -23,5 +23,7 @@
             </li>
         </ul>
     </nav>
-    <app-account-info></app-account-info>
+    @if (authService.session(); as session) {
+        <app-account-info [session]="session"></app-account-info>
+    }
 </aside>

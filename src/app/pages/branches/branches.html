@@ -3,7 +3,24 @@
         <h2 class="text-2xl font-semibold">Seleccionar sucursal</h2>
         <p class="text-app-text-secondary">Elija la tienda cuyo inventario desea consultar.</p>
     </div>
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <app-branch-card></app-branch-card>
-    </section>
+    <div class="w-full">
+        @if (branches.hasValue()) {
+            @let list = branches.value();
+            @if (list.length) {
+                <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    @for (br of list; track br.id) {
+                        <app-branch-card [branch]="br"></app-branch-card>
+                    }
+                </section>
+            } @else {
+                !list.length
+            }
+        } @else if (branches.isLoading()) {
+            <div class="w-full h-full flex justify-center items-center">
+                <svg lucideLoaderCircle [size]="64" class="text-app-indigo-600 animate-spin"></svg>
+            </div>
+        } @else if (branches.error()) {
+            branches.error()
+        }
+    </div>
 </div>

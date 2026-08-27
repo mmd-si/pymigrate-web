@@ -4,7 +4,7 @@ import { DetailedJobItem, IDetailedJobItem } from "./detailed-job-item";
 import { DetailedError, IDetailedError } from "./detailed-error";
 import { JSONModel } from "./json-model";
 
-interface IDetailedJob {
+export interface IDetailedJob {
     job_id: string;
     status: JobStatus;
     pushed_at: string;
@@ -49,9 +49,7 @@ export class DetailedJob extends JSONModel {
         this.errors = errors;
     }
 
-    public static fromJSON(json: string): DetailedJob {
-        const record = JSON.parse(json) as IDetailedJob;
-
+    public static fromJSON(record: IDetailedJob): DetailedJob {
         if (!("job_id" in record) || !("status" in record) || !("pushed_at" in record)) {
             throw this.missingRequiredFields();
         }
@@ -78,8 +76,8 @@ export class DetailedJob extends JSONModel {
             throw this.isNotMember(record.status, "JobStatus");
         }
 
-        const items = (record.items ?? []).map((item) => DetailedJobItem.fromRecord(item));
-        const errors = (record.errors ?? []).map((error) => DetailedError.fromRecord(error));
+        const items = (record.items ?? []).map((item) => DetailedJobItem.fromJSON(item));
+        const errors = (record.errors ?? []).map((error) => DetailedError.fromJSON(error));
 
         return new DetailedJob(
             record.job_id,

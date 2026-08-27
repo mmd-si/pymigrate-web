@@ -1,7 +1,15 @@
-<a href="/branches/id" class="w-full bg-white p-4 rounded-xl border border-app-border flex flex-col gap-4 shadow-xs shadow-app-neutral-300 outline-1 outline-transparent hover:outline-app-indigo-600 hover:shadow-lg duration-150">
-    <div class="size-10 text-xl rounded-lg bg-app-yellow-100 flex justify-center items-center font-semibold uppercase">SM</div>
+<a [href]="`/branches/${branch().id}`" class="w-full bg-white p-4 rounded-xl border border-app-border flex flex-col gap-4 shadow-xs shadow-app-neutral-300 outline-1 outline-transparent hover:outline-app-indigo-600 hover:shadow-lg duration-150">
+    <div class="size-10 text-xl rounded-lg bg-app-yellow-100 flex justify-center items-center font-semibold uppercase">
+        @if (branch().hasAcronym()) {
+            {{ branch().acronym!.slice(0, 2) }}
+        }
+    </div>
     <div class="space-y-1">
-        <h3 class="text-xl font-semibold">San Miguelito</h3>
-        <p class="text-app-text-muted">SUC-01 &middot; 1,284 artículos</p>
+        <h3 class="text-xl font-semibold">{{ branch().branchName() }}</h3>
+        <p class="text-app-text-muted">
+            @if (branch().hasAcronym()) {
+                {{ branch().acronym }}
+            }
+        </p>
     </div>
 </a>

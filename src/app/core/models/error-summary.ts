@@ -18,11 +18,7 @@ export class ErrorSummary extends JSONModel {
         this.occurredAt = occurredAt;
     }
 
-    public static fromJSON(json: string): ErrorSummary {
-        return this.fromRecord(JSON.parse(json) as IErrorSummary);
-    }
-
-    public static fromRecord(record: IErrorSummary): ErrorSummary {
+    public static fromJSON(record: IErrorSummary): ErrorSummary {
         if (!("message" in record) || !("occurred_at" in record)) {
             throw this.missingRequiredFields();
         }

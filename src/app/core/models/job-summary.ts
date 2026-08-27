@@ -2,8 +2,9 @@ import { ItemResult } from "@core/enums/item-result.enum";
 import { JobStatus } from "@core/enums/job-status.enum";
 import { ErrorSummary, IErrorSummary } from "./error-summary";
 import { JSONModel } from "./json-model";
+import { formatDateTimeLong } from "@core/utils";
 
-interface IJobSummary {
+export interface IJobSummary {
     job_id: string;
     status: JobStatus;
     pushed_at: string;
@@ -23,9 +24,9 @@ export class JobSummary extends JSONModel {
     public latestError: ErrorSummary | null;
 
     private constructor(
-        id: string, 
-        status: JobStatus, 
-        pushedAt: Date, 
+        id: string,
+        status: JobStatus,
+        pushedAt: Date,
         recount: Record<ItemResult, number> | null,
         latestError: ErrorSummary | null
     ) {
@@ -37,9 +38,7 @@ export class JobSummary extends JSONModel {
         this.latestError = latestError;
     }
 
-    public static fromJSON(json: string): JobSummary {
-        const record = JSON.parse(json) as IJobSummary;
-
+    public static fromJSON(record: IJobSummary): JobSummary {
         if (!("job_id" in record) || !("status" in record) || !("pushed_at" in record)) {
             throw this.missingRequiredFields();
         }
@@ -54,12 +53,32 @@ export class JobSummary extends JSONModel {
             throw this.isNotMember(record.status, "JobStatus");
         }
 
-        const latestError = record.latest_error ? ErrorSummary.fromRecord(record.latest_error) : null;
+        const latestError = record.latest_error ? ErrorSummary.fromJSON(record.latest_error) : null;
 
         return new JobSummary(record.job_id, record.status, pushedAt, record.recount ?? null, latestError);
     }
 
     public hasError(): boolean {
         return this.latestError !== null;
+    }
+
+    public pushDate(): string {
+        return formatDateTimeLong(this.pushedAt);
+    }
+
+    public pendingCount(): number {
+        return this.recount[ItemResult.Pending];
+    }
+
+    public successCount(): number {
+        return this.recount[ItemResult.Success];
+    }
+
+    public failureCount(): number {
+        return this.recount[ItemResult.Failure];
+    }
+
+    public totalRecount(): number {
+        return Object.values(this.recount).reduce((acc, count) => acc + count, 0);
     }
 }

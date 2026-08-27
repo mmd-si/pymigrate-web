@@ -1,4 +1,5 @@
 import { Component, input } from "@angular/core";
+import { InventoryItem } from "@core/models/inventory-item";
 import { LucideX } from "@lucide/angular";
 
 @Component({
@@ -7,5 +8,5 @@ import { LucideX } from "@lucide/angular";
     templateUrl: "./item-details.html",
 })
 export class ItemDetails {
-    item = input();
+    item = input.required<InventoryItem>();
 }

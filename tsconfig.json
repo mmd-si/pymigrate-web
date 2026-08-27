@@ -11,6 +11,7 @@
         "paths": {
             "@components/*": ["./src/app/components/*"],
             "@core/*": ["./src/app/core/*"],
+            "@env/*": ["./src/environments/*"],
             "@layouts/*": ["./src/app/layouts/*"],
             "@pages/*": ["./src/app/pages/*"]
         },
