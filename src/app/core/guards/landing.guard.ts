@@ -1,7 +1,8 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { AuthService } from "@core/services/auth.service";
-import { map } from "rxjs/operators";
+import { of } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 /**
  * Sends "/" to the panel if a session is present, or to login otherwise, instead of
@@ -12,6 +13,7 @@ export const landingGuard: CanActivateFn = () => {
     const router = inject(Router);
 
     return auth.fetchSession().pipe(
-        map(session => router.createUrlTree([session ? "/branches" : "/auth/login"]))
+        map(session => router.createUrlTree([session ? "/branches" : "/auth/login"])),
+        catchError(() => of(router.createUrlTree(["/auth/login"])))
     );
 };
