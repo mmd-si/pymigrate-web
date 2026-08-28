@@ -1,0 +1,26 @@
+<div class="fixed inset-0 z-10 w-screen h-screen flex justify-center items-center backdrop-brightness-60"
+    (click)="cancel.emit()">
+    <div class="relative w-full max-w-md bg-white shadow-lg shadow-neutral-500 rounded-xl p-6 space-y-4"
+        (click)="$event.stopPropagation()" animate.enter="dialog-appear" animate.leave="dialog-disappear">
+        <div class="space-y-1">
+            <h2 class="text-xl font-semibold">Confirmar transferencia</h2>
+            <p class="text-sm text-app-text-secondary">Los siguientes productos serán transferidos:</p>
+        </div>
+        <ul
+            class="p-4 space-y-2 max-h-64 overflow-y-auto text-lg font-mono rounded-lg border border-app-field-border bg-app-background">
+            @for (item of items(); track item.barcode) {
+            <li>{{ item.barcode }}</li>
+            }
+        </ul>
+        <div class="flex justify-end gap-3 pt-2">
+            <button type="button" (click)="cancel.emit()"
+                class="px-4 py-2 rounded-lg border border-app-field-border hover:bg-app-background duration-150">
+                Regresar
+            </button>
+            <button type="button" (click)="confirm.emit()"
+                class="px-4 py-2 rounded-lg text-white bg-app-indigo-600 hover:bg-app-indigo-700 duration-150">
+                Confirmar
+            </button>
+        </div>
+    </div>
+</div>

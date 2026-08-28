@@ -48,4 +48,8 @@ export class DetailedJobItem extends JSONModel {
 
         return new DetailedJobItem(record.item_id, record.barcode, record.item_name, record.category, record.result);
     }
+
+    public compactCategory() {
+        return this.category.split("/").map(w => w.trim()).join("/")
+    }
 }

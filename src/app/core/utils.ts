@@ -7,8 +7,17 @@ export const dateShort = new Intl.DateTimeFormat("es-419", {
 
 export const dateTimeLong = new Intl.DateTimeFormat("es-419", {
     dateStyle: "long",
-    timeStyle: "medium",
+    timeStyle: "short",
     timeZone: "America/Panama"
+});
+
+export const dateTimeShort = new Intl.DateTimeFormat("es-419", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/Panama",
 });
 
 /**
@@ -31,6 +40,17 @@ export function formatDateShort(date: Date): string {
  */
 export function formatDateTimeLong(date: Date): string {
     return dateTimeLong.format(date);
+}
+
+/**
+ * Functional implementation of custom short date and time
+ * formatting for use in Angular templates
+ * @param date The date object to format into a string
+ * @returns a short string representation of the provided date's date and time.
+ * @example console.log(formatDateTimeShort(new Date())); // 22 ago, 5:14 p.m.
+ */
+export function formatDateTimeShort(date: Date): string {
+    return dateTimeShort.format(date);
 }
 
 /**

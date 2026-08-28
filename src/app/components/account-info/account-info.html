@@ -1,5 +1,5 @@
 <div class="w-full p-4 rounded-lg">
-    <h4 class="text-lg font-medium">{{ session().fullName() }}</h4>
+    <h4 class="text-lg uppercase font-medium">{{ session().fullName() }}</h4>
     <button 
         class="text-app-text-muted hover:underline hover:text-white flex items-center gap-2 duration-150"
         (click)="logout()"

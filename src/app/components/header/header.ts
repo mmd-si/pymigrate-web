@@ -1,4 +1,5 @@
-import { Component, input } from "@angular/core";
+import { Component, inject, input } from "@angular/core";
+import { HeaderActionsService } from "@core/services/header-actions.service";
 
 @Component({
     imports: [],
@@ -6,5 +7,6 @@ import { Component, input } from "@angular/core";
     templateUrl: "./header.html",
 })
 export class Header {
+    public actionsService = inject(HeaderActionsService);
     public pageTitle = input("");
 }

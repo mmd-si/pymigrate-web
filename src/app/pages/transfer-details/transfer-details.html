@@ -1,102 +1,176 @@
-<div class="space-y-6">
-    <div class="space-y-2">
-        <h2 class="text-2xl font-semibold">Transferencia del 22 de agosto de 2026, 5:14 p.m.</h2>
-        <div class="flex gap-4 items-center text-app-text-secondary">
-            <span class="font-mono text-sm uppercase">Pendiente</span>
-            <p>
-                Villa Lucre
-                &nbsp;&middot;&nbsp;
-                Solicitada por Diego Chan
-            </p>
+<div class="w-full h-full flex flex-col gap-6">
+    @if (transfer.hasValue()) {
+        @let t = transfer.value();
+        <div class="space-y-2">
+            <h2 class="text-2xl font-semibold">Transferencia del {{ t.pushedAtDate() }}</h2>
+            <div class="flex gap-4 items-center text-app-text-secondary">
+                <span class="font-mono text-sm uppercase">{{ t.id }} &middot; {{ t.status }} &middot; {{ t.completedAtDate() ?? t.shiftedAtDate() ?? t.pushedAtDate() }}</span>
+            </div>
         </div>
-    </div>
-    <section class="flex gap-6 items-start">
-        <div class="flex-1 rounded-lg bg-white border border-app-border p-4 space-y-6">
-            <h3 class="flex-1 text-lg font-semibold">Progreso</h3>
-            <div class="space-y-4">
-                <div>
-                    <span class="text-3xl font-semibold">3&nbsp;</span>
-                    <span class="text-app-text-muted">de 5 procesados</span>
-                </div>
-                <div class="w-full h-2 rounded-full overflow-hidden flex items-stretch bg-app-neutral-200">
-                    <div class="h-full w-2/5 bg-app-success"></div>
-                    <div class="h-full w-1/5 bg-app-error"></div>
-                    <div class="h-full w-2/5 bg-app-pending"></div>
-                </div>
-                <div class="flex flex-col gap-1">
-                    <div class="flex items-center">
-                        <div class="flex-1 flex gap-2 items-center">
-                            <i class="size-2 rounded-full bg-app-success"></i>
-                            Éxito
-                        </div>
-                        <span class="font-mono">2</span>
+        <section class="flex gap-6 items-start">
+            <div class="flex-1 rounded-lg bg-white border border-app-border p-4 space-y-6">
+                <h3 class="flex-1 text-lg font-semibold">Progreso</h3>
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-3xl font-semibold">{{ t.itemCount() - t.pendingCount() }}&nbsp;</span>
+                        <span class="text-app-text-muted">de {{ t.itemCount() }} procesados</span>
                     </div>
-                    <div class="flex items-center">
-                        <div class="flex-1 flex gap-2 items-center">
-                            <i class="size-2 rounded-full bg-app-error"></i>
-                            Fracaso
-                        </div>
-                        <span class="font-mono">1</span>
+                    <div class="w-full h-2 rounded-full overflow-hidden flex items-stretch bg-app-neutral-200">
+                        <div class="h-full w-2/5 bg-app-success" [style]="{ width: 100 * t.successCount() / t.itemCount() + '%' }"></div>
+                        <div class="h-full w-1/5 bg-app-error" [style]="{ width: 100 * t.errorCount() / t.itemCount() + '%' }"></div>
+                        <div class="h-full w-2/5 bg-app-pending" [style]="{ width: 100 * t.pendingCount() / t.itemCount() + '%' }"></div>
                     </div>
-                    <div class="flex items-center">
-                        <div class="flex-1 flex gap-2 items-center">
-                            <i class="size-2 rounded-full bg-app-pending"></i>
-                            Pendiente
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center">
+                            <div class="flex-1 flex gap-2 items-center">
+                                <i class="size-2 rounded-full bg-app-success"></i>
+                                Éxito
+                            </div>
+                            <span class="font-mono">{{ t.successCount() }}</span>
                         </div>
-                        <span class="font-mono">2</span>
+                        <div class="flex items-center">
+                            <div class="flex-1 flex gap-2 items-center">
+                                <i class="size-2 rounded-full bg-app-error"></i>
+                                Fracaso
+                            </div>
+                            <span class="font-mono">{{ t.failureCount() }}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="flex-1 flex gap-2 items-center">
+                                <i class="size-2 rounded-full bg-app-pending"></i>
+                                Pendiente
+                            </div>
+                            <span class="font-mono">{{ t.pendingCount() }}</span>
+                        </div>
+                    </div>
+                    <hr class="border-t border-app-field-border">
+                    <div>
+                        <dl>
+                            <div class="flex items-center gap-2">
+                                <dt class="flex-1 text-app-text-secondary">Solicitada</dt>
+                                <dt>{{ t.pushedAtDate() }}</dt>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <dt class="flex-1 text-app-text-secondary">Actualizada</dt>
+                                <dt>{{ t.completedAtDate() ?? t.shiftedAtDate() ?? t.pushedAtDate() }}</dt>
+                            </div>
+                        </dl>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="flex-2 flex flex-col gap-6">
-            <div class="rounded-lg bg-white border border-app-border">
-                <div class="p-4 flex items-center gap-4">
-                    <h3 class="flex-1 text-lg font-semibold">Artículos en transferencia</h3>
-                    <span class="text-app-text-secondary">3 artículos</span>
+            <div class="flex-2 flex flex-col gap-6">
+                <div class="rounded-lg bg-white border border-app-border">
+                    <div class="p-4 flex items-center gap-4">
+                        <h3 class="flex-1 text-lg font-semibold">Artículos en transferencia</h3>
+                        <span class="text-app-text-secondary">{{ t.itemCount() }} artículos</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-app-field-border">
+                            <thead>
+                                <tr>
+                                    <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
+                                        Código de barra
+                                    </th>
+                                    <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
+                                        Nombre
+                                    </th>
+                                    <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
+                                        Categoría
+                                    </th>
+                                    <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
+                                        Resultado
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (t.hasItems()) {
+                                    @for (i of t.items; track i.id) {
+                                        <tr>
+                                            <td class="px-3 py-2 font-mono">
+                                                {{ i.barcode }}
+                                            </td>
+                                            <td class="px-3 py-2">
+                                                {{ i.name }}
+                                            </td>
+                                            <td class="px-3 py-2">
+                                                {{ i.compactCategory() }}
+                                            </td>
+                                            <td class="px-3 py-2">
+                                                @switch (i.result) {
+                                                    @case (ItemResult.Pending) {
+                                                        <span class="text-xs font-semibold uppercase text-app-text-secondary px-2 py-1 rounded-full bg-app-neutral-100">Pendiente</span>
+                                                    }
+                                                    @case (ItemResult.Success) {
+                                                        <span class="text-xs font-semibold uppercase text-app-text-primary px-2 py-1 rounded-full bg-app-green-100">Éxito</span>
+                                                    }
+                                                    @case (ItemResult.Failure) {
+                                                        <span class="text-xs font-semibold uppercase text-app-text-primary px-2 py-1 rounded-full bg-app-red-100">Fracaso</span>
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                } @else {
+                                    <tr>
+                                        <td colspan="9999" class="px-3 py-2 font-mono">
+                                            <p class="w-full flex-items-center gap-2 text-app-text-muted">
+                                                <svg lucideFaceSlightlyFrowning [size]="18"></svg>
+                                                Esta transferencia no cuenta con productos.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full border-app-field-border">
-                        <thead>
-                            <tr>
-                                <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
-                                    Código de barra
-                                </th>
-                                <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
-                                    Descripción
-                                </th>
-                                <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
-                                    Categoría
-                                </th>
-                                <th class="px-3 py-2 text-xs text-left text-app-text-secondary font-semibold uppercase bg-app-table-header">
-                                    Resultado
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="px-3 py-2 font-mono">
-                                    7501234560043
-                                </td>
-                                <td class="px-3 py-2">
-                                    Reloj Rolex Datejust acero-oro
-                                </td>
-                                <td class="px-3 py-2">
-                                    Relojes
-                                </td>
-                                <td class="px-3 py-2">
-                                    <span class="text-xs font-semibold text-app-text-secondary px-2 py-1 rounded-full bg-app-neutral-100">Pendiente</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="rounded-lg bg-white border border-app-border p-4 space-y-4">
+                    <h3 class="flex-1 flex items-center gap-2 text-lg font-semibold">
+                        Errores
+                        @if (t.hasErrors()) {
+                            <span class="leading-4 size-4 text-xs font-semibold bg-app-red-50 text-app-red-800 border border-app-red-200 rounded-full flex justify-center items-center">
+                                @if (t.errorCount() <= 9) {
+                                    {{t.errorCount()}}
+                                } @else {
+                                    9+
+                                }
+                            </span>
+                        }
+                    </h3>
+                    @if (t.hasErrors()) {
+                        <div class="grid grid-cols-1 gap-4">
+                            @for (e of t.errors; track e.id) {
+                                <div class="flex items-stretch gap-4 p-4 rounded-lg border border-app-red-300 bg-app-red-50">
+                                    <div>
+                                        <svg lucideCircleAlert [size]="18" class="text-app-red-500 mt-1.5"></svg>
+                                    </div>
+                                    <div class="flex-1 space-y-2">
+                                        <div class="text-lg font-semibold">{{ e.message }}</div>
+                                        <p class="text-app-text-secondary">{{ e.description }}</p>
+                                        <div class="flex gap-6 font-mono text-app-text-muted">
+                                            <p>{{ e.itemId }}</p>
+                                            <p>{{ e.ocurredAtDate() }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    } @else {
+                        <p class="text-app-text-secondary">
+                            No ha habido errores en el procesamiento de esta transferencia.
+                        </p>
+                    }
                 </div>
             </div>
-            <div class="rounded-lg bg-white border border-app-border p-4">
-                <h3 class="flex-1 text-lg font-semibold">Errores</h3>
-                <p class="text-app-text-secondary">
-                    No ha habido errores en el procesamiento de esta transferencia.
-                </p>
-            </div>
+        </section>
+    } @else if (transfer.isLoading()) {
+        <div class="w-full h-full flex justify-center items-center">
+            <svg lucideLoaderCircle [size]="64" class="text-app-indigo-600 animate-spin"></svg>
         </div>
-    </section>
+    } @else if (transfer.error()) {
+        <p class="flex items-center gap-2 text-app-text-secondary">
+            <svg lucideFaceSlightlyFrowning [size]="18"></svg>
+            Hubo un error al buscar la transferencia.
+        </p>
+    }
 </div>

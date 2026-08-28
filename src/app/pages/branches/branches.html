@@ -1,9 +1,9 @@
-<div class="space-y-6">
+<div class="w-full h-full flex flex-col gap-6">
     <div class="space-y-2">
         <h2 class="text-2xl font-semibold">Seleccionar sucursal</h2>
         <p class="text-app-text-secondary">Elija la tienda cuyo inventario desea consultar.</p>
     </div>
-    <div class="w-full">
+    <div class="flex-1 w-full">
         @if (branches.hasValue()) {
             @let list = branches.value();
             @if (list.length) {
@@ -13,14 +13,17 @@
                     }
                 </section>
             } @else {
-                !list.length
+                <p class="text-app-text-secondary">No hay sucursales que mostrar</p>
             }
         } @else if (branches.isLoading()) {
             <div class="w-full h-full flex justify-center items-center">
                 <svg lucideLoaderCircle [size]="64" class="text-app-indigo-600 animate-spin"></svg>
             </div>
         } @else if (branches.error()) {
-            branches.error()
+            <p class="flex items-center gap-2 text-app-text-secondary">
+                <svg lucideFaceSlightlyFrowning [size]="18"></svg>
+                Hubo un error al buscar las sucursales.
+            </p>
         }
     </div>
 </div>

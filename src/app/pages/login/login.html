@@ -53,7 +53,13 @@
                             type="button"
                             class="text-app-indigo-600 hover:underline font-medium" 
                             (click)="toggleShowPassword()"
-                        >Mostrar</button>
+                        >
+                            @if (showPassword()) {
+                                Esconder
+                            } @else {
+                                Mostrar
+                            }
+                        </button>
                     </div>
                 </div>
                 <div>

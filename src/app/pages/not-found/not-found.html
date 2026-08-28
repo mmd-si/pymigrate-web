@@ -1,0 +1,22 @@
+<div class="w-full max-w-md mx-auto h-full flex flex-col gap-8 justify-center items-center">
+    <div class="flex flex-col items-center gap-4">
+        <div
+            class="rounded-4xl size-36 flex justify-center items-center border border-app-yellow-300 bg-app-yellow-100 text-5xl font-semibold font-mono">
+            404
+        </div>
+        <h2 class="text-2xl font-semibold">Esta página no existe</h2>
+        <p class="text-center text-app-text-secondary">
+            La dirección que abriste no corresponde a
+            ninguna pantalla de PyMigrate. Puede que
+            el enlace esté incompleto o que el registro
+            se haya eliminado.
+        </p>
+        <div
+            class="overflow-x-auto rounded-lg bg-app-indigo-50 border border-app-border font-mono px-3 py-1 text-app-text-muted text-sm">
+            {{ location.path() }}
+        </div>
+    </div>
+    <a routerLink="/branches"
+        class="px-4 py-2 rounded-lg text-white bg-app-indigo-600 hover:bg-app-indigo-700 duration-150 text-lg font-semibold">Ir
+        a sucursales</a>
+</div>

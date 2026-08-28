@@ -1,12 +1,14 @@
 @let item = this.item();
-<div class="fixed inset-0 z-10 w-screen h-screen flex justify-center items-center backdrop-brightness-60">
-    <div class="relative w-200 bg-white shadow-lg shadow-neutral-500 rounded-xl">
-        <button class="absolute top-3 right-3">
+<div class="fixed inset-0 z-10 w-screen h-screen flex justify-center items-center backdrop-brightness-60"
+    (click)="close.emit()">
+    <div class="relative w-200 bg-white shadow-lg shadow-neutral-500 rounded-xl" (click)="$event.stopPropagation()"
+        animate.enter="dialog-appear" animate.leave="dialog-disappear">
+        <button type="button" class="absolute top-3 right-3" aria-label="Cerrar detalles" (click)="close.emit()">
             <svg lucideX [size]="24" class="text-app-text-secondary"></svg>
         </button>
         <div class="p-6">
             <div class="flex items-center gap-4">
-                <h2 class="text-2xl font-semibold">Anillo 14k oro amarillo 15.2grs.</h2>
+                <h2 class="text-2xl font-semibold">{{ item.name || item.description }}</h2>
                 @if (item.canBeBought) {
                     <span class="px-2 py-1 text-xs rounded-full border border-blue-200 bg-blue-50 text-blue-800">Puede ser comprado</span>
                 } @else if (item.canBeSold) {
@@ -95,9 +97,19 @@
         </div>
         <hr class="border-t border-app-field-border">
         <div class="p-6 w-full flex justify-end">
-            <button class="rounded-lg p-2 bg-indigo-600 hover:bg-indigo-700 text-white duration-150">
-                Seleccionar
+            @if (selected()) {
+            <button type="button" (click)="toggleSelection.emit()"
+                class="rounded-lg p-2 flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white duration-150">
+                <svg lucideMinus [size]="18"></svg>
+                Quitar de la lista
             </button>
+            } @else {
+            <button type="button" (click)="toggleSelection.emit()"
+                class="rounded-lg p-2 flex items-center gap-2 bg-app-indigo-600 hover:bg-app-indigo-700 text-white duration-150">
+                <svg lucidePlus [size]="18"></svg>
+                Agregar a la lista
+            </button>
+            }
         </div>
     </div>
 </div>

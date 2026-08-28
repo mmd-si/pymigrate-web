@@ -1,3 +1,4 @@
+import { formatDateTimeShort } from "@core/utils";
 import { JSONModel } from "./json-model";
 
 export interface IDetailedError {
@@ -61,5 +62,9 @@ export class DetailedError extends JSONModel {
 
     public hasDescription(): boolean {
         return this.description !== null
+    }
+
+    public ocurredAtDate(): string {
+        return formatDateTimeShort(this.occurredAt);
     }
 }

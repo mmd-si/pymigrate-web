@@ -108,11 +108,19 @@ input[type="reset"] {
 }
 
 .alert-appear {
-    animation: alertAppear 0.3s ease-in-out forwards;
+    animation: alertAppear 250ms ease-in-out forwards;
 }
 
 .alert-disappear {
-    animation: alertAppear 0.3s ease-in-out reverse forwards;
+    animation: alertAppear 250ms ease-in-out reverse forwards;
+}
+
+.dialog-appear {
+    animation: dialogAppear 250ms ease-in-out forwards;
+}
+
+.dialog-disappear {
+    animation: dialogAppear 250ms ease-in-out reverse forwards;
 }
 
 @keyframes alertAppear {
@@ -123,5 +131,17 @@ input[type="reset"] {
     100% {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes dialogAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(-1.5rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

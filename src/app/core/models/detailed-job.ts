@@ -3,6 +3,7 @@ import { JobStatus } from "@core/enums/job-status.enum";
 import { DetailedJobItem, IDetailedJobItem } from "./detailed-job-item";
 import { DetailedError, IDetailedError } from "./detailed-error";
 import { JSONModel } from "./json-model";
+import { formatDateTimeLong, formatDateTimeShort } from "@core/utils";
 
 export interface IDetailedJob {
     job_id: string;
@@ -103,6 +104,18 @@ export class DetailedJob extends JSONModel {
         return this.items.length;
     }
 
+    public failureCount(): number {
+        return this.recount[ItemResult.Failure]
+    }
+
+    public pendingCount(): number {
+        return this.recount[ItemResult.Pending]
+    }
+
+    public successCount(): number {
+        return this.recount[ItemResult.Success]
+    }
+
     public hasItems(): boolean {
         return this.itemCount() !== 0;
     }
@@ -113,5 +126,21 @@ export class DetailedJob extends JSONModel {
 
     public hasErrors(): boolean {
         return this.errorCount() !== 0;
+    }
+
+    public pushedAtDateLong(): string {
+        return formatDateTimeLong(this.pushedAt);
+    }
+
+    public pushedAtDate(): string {
+        return formatDateTimeShort(this.pushedAt);
+    }
+
+    public shiftedAtDate(): string | null {
+        return this.isShifted() ? formatDateTimeShort(this.shiftedAt!) : null;
+    }
+
+    public completedAtDate(): string | null {
+        return this.isComplete() ? formatDateTimeShort(this.completedAt!) : null;
     }
 }

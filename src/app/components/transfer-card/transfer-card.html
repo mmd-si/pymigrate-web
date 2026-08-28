@@ -1,13 +1,25 @@
 <div class="bg-white border border-app-border rounded-lg p-4 space-y-4">
     <div class="flex gap-4">
         <div class="flex-1 space-y-1">
-            <a href="/transfers/id" class="text-lg font-semibold hover:underline">
+            <a [routerLink]="['/transfers', summary().id]" class="text-lg font-semibold hover:underline">
                 {{ summary().pushDate() }}
             </a>
             <p class="text-app-text-muted">
                 {{ summary().id }}
             </p>
         </div>
+        <span
+            class="h-fit px-3 py-1 rounded-full border uppercase text-xs font-semibold"
+            [class.bg-app-indigo-50]="summary().status === JobStatus.Completed"
+            [class.border-app-indigo-300]="summary().status === JobStatus.Completed"
+            [class.text-app-indigo-800]="summary().status === JobStatus.Completed"
+            [class.bg-app-yellow-50]="summary().status === JobStatus.Processing"
+            [class.border-app-yellow-300]="summary().status === JobStatus.Processing"
+            [class.text-app-yellow-800]="summary().status === JobStatus.Processing"
+            [class.bg-app-neutral-50]="summary().status === JobStatus.Pending"
+            [class.border-app-neutral-300]="summary().status === JobStatus.Pending"
+            [class.text-app-neutral-800]="summary().status === JobStatus.Pending"
+        >{{ summary().status }}</span>
     </div>
     <div class="space-y-2">
         <div class="w-full h-2 rounded-full overflow-hidden flex items-stretch bg-app-neutral-200">

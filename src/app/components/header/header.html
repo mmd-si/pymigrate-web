@@ -1,3 +1,30 @@
-<header class="bg-white border-b shadow-sm shadow-app-neutral-300 border-app-border px-8 py-3">
-    <h1 class="text-2xl font-medium">{{ pageTitle() }}</h1>
+@let buttons = actionsService.buttons();
+<header class="flex items-center gap-4 bg-white border-b shadow-sm shadow-app-neutral-300 border-app-border px-8 py-3">
+    <h1 class="flex-1 text-2xl font-medium">{{ pageTitle() }}</h1>
+    @if (buttons.length) {
+        <div class="flex items-center gap-2">
+            @for (btn of buttons; track btn.name) {
+                <button
+                    class="px-3 py-1.5 rounded-lg font-medium border duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
+                    [disabled]="btn.disabled"
+
+                    [class.bg-app-indigo-600]="btn.type === 'primary'"
+                    [class.text-white]="btn.type === 'primary'"
+                    [class.border-app-indigo-600]="btn.type === 'primary'"
+                    [class.hover:bg-app-indigo-700]="btn.type === 'primary'"
+                    [class.hover:border-app-indigo-700]="btn.type === 'primary'"
+
+                    [class.bg-app-neutral-300]="btn.type === 'secondary'"
+                    [class.text-app-text-muted]="btn.type === 'secondary'"
+                    [class.border-app-neutral-300]="btn.type === 'secondary'"
+                    [class.hover:bg-app-neutral-400]="btn.type === 'secondary'"
+                    [class.hover:border-app-neutral-400]="btn.type === 'secondary'"
+
+                    (click)="btn.action($event)"
+                >
+                    {{ btn.text }}
+                </button>
+            }
+        </div>
+    }
 </header>
