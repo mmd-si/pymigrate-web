@@ -9,6 +9,11 @@
 # Generated at build time from environment variables (see scripts/set-env.js)
 /src/environments/environment.prod.ts
 
+# Environment variables
+.env
+.env.*
+!.env.example
+
 # Node
 /node_modules
 npm-debug.log
