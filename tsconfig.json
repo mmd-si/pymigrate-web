@@ -1,6 +1,8 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
+        "module": "esnext",
+        "moduleResolution": "bundler",
         "noImplicitOverride": true,
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,
@@ -17,7 +19,6 @@
         },
         "importHelpers": true,
         "target": "esnext",
-        "module": "preserve"
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,

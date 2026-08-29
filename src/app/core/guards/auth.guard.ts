@@ -1,7 +1,8 @@
 import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { AuthService } from "@core/services/auth.service";
-import { map } from "rxjs/operators";
+import { of } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 /**
  * Blocks activation unless a session is present, redirecting to the login page otherwise.
@@ -12,6 +13,7 @@ export const authGuard: CanActivateFn = () => {
     const router = inject(Router);
 
     return auth.fetchSession().pipe(
-        map(session => session ? true : router.createUrlTree(["/auth/login"]))
+        map(session => session ? true : router.createUrlTree(["/auth/login"])),
+        catchError(() => of(router.createUrlTree(["/auth/login"])))
     );
 };
