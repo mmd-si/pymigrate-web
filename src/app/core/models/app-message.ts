@@ -17,7 +17,7 @@ export class AppMessage extends JSONModel {
         this.message = message;
     }
 
-    public static fromJSON(record: IAppMessage): JSONModel {
+    public static fromJSON(record: IAppMessage): AppMessage {
         if (!("type" in record) || !("message" in record)) {
             throw this.missingRequiredFields();
         }
