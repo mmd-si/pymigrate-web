@@ -4,7 +4,16 @@
         <p class="text-app-text-secondary">Elija la tienda cuyo inventario desea consultar.</p>
     </div>
     <div class="flex-1 w-full">
-        @if (branches.hasValue()) {
+        @if (branches.isLoading()) {
+            <div class="w-full h-full flex justify-center items-center">
+                <svg lucideLoaderCircle [size]="64" class="text-app-indigo-600 animate-spin"></svg>
+            </div>
+        } @else if (branches.error()) {
+            <p class="flex items-center gap-2 text-app-text-secondary">
+                <svg lucideFaceSlightlyFrowning [size]="18"></svg>
+                Hubo un error al buscar las sucursales.
+            </p>
+        } @else if (branches.hasValue()) {
             @let list = branches.value();
             @if (list.length) {
                 <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -15,15 +24,6 @@
             } @else {
                 <p class="text-app-text-secondary">No hay sucursales que mostrar</p>
             }
-        } @else if (branches.isLoading()) {
-            <div class="w-full h-full flex justify-center items-center">
-                <svg lucideLoaderCircle [size]="64" class="text-app-indigo-600 animate-spin"></svg>
-            </div>
-        } @else if (branches.error()) {
-            <p class="flex items-center gap-2 text-app-text-secondary">
-                <svg lucideFaceSlightlyFrowning [size]="18"></svg>
-                Hubo un error al buscar las sucursales.
-            </p>
         }
     </div>
 </div>

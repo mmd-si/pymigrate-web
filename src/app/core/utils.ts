@@ -106,11 +106,15 @@ export function toMMDTitle(text: string): string {
     return result.join(" ");
 };
 
+export function capitalize(text: string): string {
+    return (text.at(0) ?? "").toUpperCase() + text.slice(1).toLowerCase();
+}
+
 export function toTitle(text: string): string {
     return text
         .split(" ")
         .filter(Boolean)
         .map(w => w.trim())
-        .map(w => (w.at(0) ?? "").toUpperCase() + w.slice(1).toLowerCase())
+        .map(capitalize)
         .join(" ");
 }

@@ -1,9 +1,13 @@
+import { httpResource } from "@angular/common/http";
 import { Component, inject, signal } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Logo } from "@components/logo/logo";
+import { MessageType } from "@core/enums/message-type.enum";
+import { AppMessage, IAppMessage } from "@core/models/app-message";
 import { AlertService } from "@core/services/alert.service";
 import { AuthService } from "@core/services/auth.service";
+import { environment } from "@env/environment";
 import { LucideCheck } from "@lucide/angular";
 
 @Component({
@@ -18,9 +22,17 @@ export class Login {
 
     public showPassword = signal(false);
 
+    public version = signal(environment.version);
+
     public username = signal("");
     public password = signal("");
     public rememberMe = signal(false);
+
+    public health = httpResource(() => `${environment.apiUrl}/api/health`, {
+        parse: (body: unknown) => AppMessage.fromJSON(body as IAppMessage)
+    });
+
+    public MessageType = MessageType;
 
     public toggleShowPassword() {
         this.showPassword.set(!this.showPassword());
@@ -41,7 +53,7 @@ export class Login {
             next: () => {
                 this.router.navigate(["/branches"]);
             },
-            error: () => { /* the flash interceptor surfaces this via AlertService */ }
+            error: () => { }
         });
     }
 }

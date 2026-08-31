@@ -6,10 +6,30 @@
             <h2 class="text-4xl font-semibold">Inventario y transferencias entre sistemas</h2>
             <p class="text-xl text-app-indigo-200">Consulte existencias por código de barra y mueva artículos a Odoo.</p>
         </div>
-        <div class="text-app-navy-400">
-            <span>v0.0.1</span>
+        <div class="flex items-center gap-2 text-app-navy-400">
+            <div>v{{ version() }}</div>
             &middot;
-            <span>Panamá</span>
+            <div>Panamá</div>
+            &middot;
+            <div class="flex items-center gap-2">
+                @if (health.hasValue()) {
+                    @let h = health.value();
+                    <i 
+                        class="size-2 rounded-full"
+                        [class.bg-app-green-300]="h.type === MessageType.Success"
+                        [class.bg-blue-300]="h.type === MessageType.Info"
+                        [class.bg-app-yellow-300]="h.type === MessageType.Warning"
+                        [class.bg-app-red-300]="h.type === MessageType.Error"
+                    ></i>
+                    <p class="uppercase font-mono text-sm">{{ h.message }}</p>
+                } @else if (health.isLoading()) {
+                    <i class="size-2 rounded-full bg-app-neutral-300/40 animate-pulse"></i>
+                    <p class="uppercase font-mono bg-app-neutral-300/40 animate-pulse text-sm w-60 rounded-md">&nbsp;</p>
+                } @else if (health.error()) {
+                    <i class="size-2 rounded-full bg-app-red-300"></i>
+                    <p class="uppercase">Conexión al servidor fallida</p>
+                }
+            </div>
         </div>
     </div>
     <div class="flex-1 bg-app-background p-4">

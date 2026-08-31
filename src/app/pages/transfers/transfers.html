@@ -1,5 +1,38 @@
 <div class="w-full h-full flex flex-col gap-6">
-    @if (transfers.hasValue()) {
+    <div class="flex justify-end items-stretch gap-2">
+        <input
+            type="radio"
+            name="status" 
+            class="appearance-none border cursor-pointer border-app-border checked:border-app-indigo-600 px-2 py-1 bg-white checked:bg-app-indigo-600 checked:text-white duration-150 rounded-lg flex justify-center items-center after:content-[attr(data-label)]"
+            value="All"
+            data-label="Todos"
+            [checked]="status() === 'All'"
+            (change)="status.set($event.target.value)"
+        >
+        @for(entry of jobStatusMembers; track $index) {
+            @let key = entry[0];
+            @let value = entry[1];
+            <input
+                type="radio"
+                name="status"
+                class="appearance-none border cursor-pointer border-app-border checked:border-app-indigo-600 px-2 py-1 bg-white checked:bg-app-indigo-600 checked:text-white duration-150 rounded-lg flex justify-center items-center after:content-[attr(data-label)]"
+                [value]="key"
+                [attr.data-label]="capitalize(value)"
+                [checked]="status() === key"
+                (change)="status.set($event.target.value)"
+            >
+        }
+    </div>
+    @if (transfers.isLoading()) {
+            <div class="w-full h-full flex justify-center items-center">
+                <svg lucideLoaderCircle [size]="64" class="text-app-indigo-600 animate-spin"></svg>
+            </div>
+        } @else if (transfers.error()) {
+            <p class="flex items-center gap-2 text-app-text-secondary">
+                <svg lucideFaceSlightlyFrowning [size]="18"></svg>
+                Hubo un error al buscar las transferencias.
+            </p>
+        } @else if (transfers.hasValue()) {
         @let list = transfers.value();
         @if (list.length) {
                 <section class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
@@ -10,15 +43,6 @@
             } @else {
                 <p class="text-app-text-secondary">No hay transferencias que mostrar</p>
             }
-        } @else if (transfers.isLoading()) {
-            <div class="w-full h-full flex justify-center items-center">
-                <svg lucideLoaderCircle [size]="64" class="text-app-indigo-600 animate-spin"></svg>
-            </div>
-        } @else if (transfers.error()) {
-            <p class="flex items-center gap-2 text-app-text-secondary">
-                <svg lucideFaceSlightlyFrowning [size]="18"></svg>
-                Hubo un error al buscar las transferencias.
-            </p>
         }
 </div>
 
