@@ -23,7 +23,8 @@
                     ></i>
                     <p class="uppercase font-mono text-sm">{{ h.message }}</p>
                 } @else if (health.isLoading()) {
-
+                    <i class="size-2 rounded-full bg-app-neutral-300 animate-pulse"></i>
+                    <p class="uppercase font-mono bg-app-neutral-300 animate-pulse text-sm w-60 rounded-full">&nbsp;</p>
                 } @else if (health.error()) {
                     <i class="size-2 rounded-full bg-app-red-300"></i>
                     <p class="uppercase">Conexión al servidor fallida</p>
